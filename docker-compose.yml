@@ -1,0 +1,6 @@
+﻿services:
+  bethanyspieshop:
+    image: bethanyspieshop
+    build:
+      context: .
+      dockerfile: BethanysPieShop/Dockerfile
