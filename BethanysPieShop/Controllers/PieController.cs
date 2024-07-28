@@ -1,4 +1,5 @@
 ﻿using BethanysPieShop.Models;
+using BethanysPieShop.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BethanysPieShop.Controllers;
@@ -7,7 +8,7 @@ public class PieController(IPieRepository pieRepository, ICategoryRepository cat
 {
     public IActionResult List()
     {
-        ViewBag.CurrentCategory = "Cheese cakes";
-        return View(pieRepository.AllPies);
+        PieListViewModel pieListViewModel = new(pieRepository.AllPies, "Cheese cakes");
+        return View(pieListViewModel);
     }
 }
