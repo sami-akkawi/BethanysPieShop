@@ -2,13 +2,13 @@
 
 namespace BethanysPieShop.Models;
 
-public class PieRepository(BenathysPieShopDbContext benathysPieShopDbContext) : IPieRepository
+public class PieRepository(BethanysPieShopDbContext bethanysPieShopDbContext) : IPieRepository
 {
     public IEnumerable<Pie> AllPies
     {
         get
         {
-            return benathysPieShopDbContext.Pies.Include(c => c.Category);
+            return bethanysPieShopDbContext.Pies.Include(c => c.Category);
         }
     }
 

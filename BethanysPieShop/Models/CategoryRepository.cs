@@ -1,12 +1,12 @@
 ﻿namespace BethanysPieShop.Models;
 
-public class CategoryRepository(BenathysPieShopDbContext benathysPieShopDbContext) : ICategoryRepository
+public class CategoryRepository(BethanysPieShopDbContext bethanysPieShopDbContext) : ICategoryRepository
 {
     public IEnumerable<Category> AllCategories
     {
         get
         {
-            return benathysPieShopDbContext.Categories.OrderBy(c => c.CategoryName);
+            return bethanysPieShopDbContext.Categories.OrderBy(c => c.CategoryName);
         }
     }
 }

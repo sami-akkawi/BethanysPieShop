@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BethanysPieShop.Migrations
 {
-    [DbContext(typeof(BenathysPieShopDbContext))]
+    [DbContext(typeof(BethanysPieShopDbContext))]
     [Migration("20240731022202_InitialMigration")]
     partial class InitialMigration
     {
