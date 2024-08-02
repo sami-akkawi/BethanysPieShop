@@ -11,4 +11,11 @@ public class PieController(IPieRepository pieRepository, ICategoryRepository cat
         PieListViewModel pieListViewModel = new(pieRepository.AllPies, "Cheese cakes");
         return View(pieListViewModel);
     }
+
+    public IActionResult Details(int id)
+    {
+        Pie? pie = pieRepository.GetPieById(id);
+        if (pie == null) return NotFound();
+        return View(pie);
+    }
 }

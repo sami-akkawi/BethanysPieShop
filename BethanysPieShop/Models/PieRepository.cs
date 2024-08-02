@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace BethanysPieShop.Models;
 
@@ -22,6 +23,8 @@ public class PieRepository(BethanysPieShopDbContext bethanysPieShopDbContext) : 
 
     public Pie? GetPieById(int pieId)
     {
-        throw new NotImplementedException();
+        IQueryable<Pie> pie = bethanysPieShopDbContext.Pies.Where(p => p.PieId == pieId);
+        if (pie.IsNullOrEmpty()) return null;
+        return pie.First();
     }
 }
