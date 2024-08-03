@@ -8,7 +8,7 @@ public class PieController(IPieRepository pieRepository, ICategoryRepository cat
 {
     public IActionResult List()
     {
-        PieListViewModel pieListViewModel = new(pieRepository.AllPies, "Cheese cakes");
+        PieListViewModel pieListViewModel = new(pieRepository.AllPies, "All Pies");
         return View(pieListViewModel);
     }
 
