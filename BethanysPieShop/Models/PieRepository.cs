@@ -9,7 +9,9 @@ public class PieRepository(BethanysPieShopDbContext bethanysPieShopDbContext) : 
     {
         get
         {
-            return bethanysPieShopDbContext.Pies.Include(c => c.Category);
+            return bethanysPieShopDbContext
+                .Pies
+                .Include(c => c.Category);
         }
     }
 
@@ -17,7 +19,10 @@ public class PieRepository(BethanysPieShopDbContext bethanysPieShopDbContext) : 
     {
         get
         {
-            return AllPies.Where(p => p.IsPieOfTheWeek);
+            return bethanysPieShopDbContext
+                .Pies
+                .Where(p => p.IsPieOfTheWeek)
+                .Include(c => c.Category);
         }
     }
 
