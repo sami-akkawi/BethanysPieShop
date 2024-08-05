@@ -5,6 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<BethanysPieShopDbContext>(options => options.UseSqlServer(builder.Configuration["ConnectionStrings:BenthanyPieShopDbContextConnection"]));
+builder.Services.AddSession();
 
 // add own services
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
@@ -20,6 +21,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapDefaultControllerRoute();
+app.UseSession();
 
 DbInitializer.Seed(app);
 
