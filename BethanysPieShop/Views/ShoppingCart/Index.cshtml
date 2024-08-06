@@ -25,6 +25,10 @@
                 </div>
             </div>
         }
+        @if (Model.ShoppingCart.ShoppingCartItems.Count == 0)
+        {
+            <h4>No items added yet!</h4>
+        }
     </div>
     <div class="col-4">
         <div class="card shopping-cart-card p-3">
