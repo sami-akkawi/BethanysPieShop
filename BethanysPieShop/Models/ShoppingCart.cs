@@ -12,7 +12,11 @@ public class ShoppingCart(BethanysPieShopDbContext bethanysPieShopDbContext) : I
         ISession? session = services.GetRequiredService<IHttpContextAccessor>()?.HttpContext?.Session;
         BethanysPieShopDbContext dbContext = services.GetRequiredService<BethanysPieShopDbContext>() ?? throw new Exception("Error initializing");
 
-        Guid cartId = new Guid(session?.GetString("CartId") ?? Guid.NewGuid().ToString());
+        string? sessionCartId = session?.GetString("CartId");
+
+        Guid cartId = sessionCartId == null ? Guid.NewGuid() : new(sessionCartId);
+        
+        session?.SetString("CartId", cartId.ToString());
 
         return new ShoppingCart(dbContext) { ShoppingCartId = cartId };
     }
@@ -20,7 +24,7 @@ public class ShoppingCart(BethanysPieShopDbContext bethanysPieShopDbContext) : I
     public void AddToCart(Pie pie)
     {
         var shoppingCartItem = bethanysPieShopDbContext.ShoppingCartItems.SingleOrDefault(
-            s => s.Pie.PieId == pie.PieId && s.ShoppingCartId == ShoppingCartId
+            s => (s.Pie.PieId == pie.PieId && s.ShoppingCartId == ShoppingCartId)
         );
 
         if (shoppingCartItem == null)
@@ -31,12 +35,14 @@ public class ShoppingCart(BethanysPieShopDbContext bethanysPieShopDbContext) : I
                 Pie = pie,
                 Amount = 1
             };
+            bethanysPieShopDbContext.ShoppingCartItems.Add(shoppingCartItem);
         }
         else
         {
             shoppingCartItem.Amount++;
+            bethanysPieShopDbContext.ShoppingCartItems.Update(shoppingCartItem);
         }
-
+        
         bethanysPieShopDbContext.SaveChanges();
     }
 
