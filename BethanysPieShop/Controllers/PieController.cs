@@ -6,9 +6,16 @@ namespace BethanysPieShop.Controllers;
 
 public class PieController(IPieRepository pieRepository, ICategoryRepository categoryRepository) : Controller
 {
-    public IActionResult List()
+    public IActionResult List(string category)
     {
-        PieListViewModel pieListViewModel = new(pieRepository.AllPies, "All Pies");
+        PieListViewModel pieListViewModel = new(
+            string.IsNullOrEmpty(category) 
+                ? pieRepository.AllPies.OrderBy(p => p.PieId).ToList() 
+                : pieRepository.AllPies.Where(p => p.Category.CategoryName == category).OrderBy(p => p.PieId), 
+            string.IsNullOrEmpty(category) 
+                ? "All Pies" 
+                : categoryRepository.AllCategories.FirstOrDefault(c => c.CategoryName == category)?.CategoryName
+        );
         return View(pieListViewModel);
     }
 
