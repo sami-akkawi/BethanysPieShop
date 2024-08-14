@@ -9,6 +9,9 @@ builder.Services.AddDbContext<BethanysPieShopDbContext>(options => options.UseSq
 builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
 
+// required for API services, not needed here because AddControllersWithViews is used
+// builder.Services.AddControllers();
+
 // add own services
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IPieRepository, PieRepository>();
@@ -24,6 +27,9 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
 }
+
+// required for API, not needed here because we use MapDefaultControllerRoute
+// app.MapControllers();
 
 app.MapDefaultControllerRoute();
 app.MapRazorPages();
