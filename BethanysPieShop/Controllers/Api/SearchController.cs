@@ -23,4 +23,17 @@ public class SearchController(IPieRepository pieRepository) : ControllerBase
         
         return Ok(pie);
     }
+
+    [HttpPost]
+    public IActionResult SearchPies([FromBody]string searchQuery)
+    {
+        IEnumerable<Pie> pies = new List<Pie>();
+        
+        if (!string.IsNullOrEmpty(searchQuery))
+        {
+            pies = pieRepository.SearchPies(searchQuery);
+        }
+        
+        return new JsonResult(pies);
+    }
 }

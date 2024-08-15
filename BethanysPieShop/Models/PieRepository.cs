@@ -32,4 +32,9 @@ public class PieRepository(BethanysPieShopDbContext bethanysPieShopDbContext) : 
         if (pie.IsNullOrEmpty()) return null;
         return pie.First();
     }
+
+    public IEnumerable<Pie> SearchPies(string searchQuery)
+    {
+        return bethanysPieShopDbContext.Pies.Where(p => p.Name.Contains(searchQuery));
+    }
 }
