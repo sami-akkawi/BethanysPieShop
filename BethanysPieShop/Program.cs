@@ -11,6 +11,9 @@ builder.Services.AddDbContext<BethanysPieShopDbContext>(options => options.UseSq
 builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
 
+builder.Services.AddRazorComponents()
+    .AddInteractiveServerComponents();
+
 // required for API services, not needed here because AddControllersWithViews is used
 // builder.Services.AddControllers();
 
