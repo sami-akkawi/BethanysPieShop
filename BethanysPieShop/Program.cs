@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using BethanysPieShop.App;
 using BethanysPieShop.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -40,7 +41,7 @@ app.UseAntiforgery();
 
 app.MapDefaultControllerRoute();
 app.MapRazorPages();
-app.MapRazorComponents<WebApplication>()
+app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
 DbInitializer.Seed(app);
