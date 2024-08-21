@@ -1,8 +1,10 @@
 ﻿using BethanysPieShop.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BethanysPieShop.Controllers;
 
+[Authorize]
 public class OrderController(IOrderRepository orderRepository, IShoppingCart shoppingCart) : Controller
 {
     public IActionResult Checkout()
